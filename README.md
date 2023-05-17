@@ -3,6 +3,7 @@
 Este é um projeto desenvolvido para a disciplina de Programação de Dispositivos Móveis.
 
 Lean Canvas: https://drive.google.com/file/d/14P3wqxC-Nw2RVVqEO68FQ0dzPSrWcNEW/view?usp=share_link
+
 Canvas - Proposta de Negócio: https://docs.google.com/drawings/d/1fRQVrouObDBbf-vXz5V3pu6217igu7y7_8gU3c1nuPA/edit?usp=share_link
 
 <h4 align="center"> 
