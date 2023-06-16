@@ -5,8 +5,8 @@
     <string name="pesquisar">btnPesquisar</string>
 
     <string-array name="tipos_transacao">
-        <item>Entrada</item>
-        <item>Saída</item>
+        <transacao>Entrada</transacao>
+        <transacao>Saída</transacao>
     </string-array>
 
 </resources>

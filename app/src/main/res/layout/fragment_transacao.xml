@@ -65,7 +65,7 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            app:backgroundTint="#CCCCCC"
+            app:backgroundTint="#FFFFFF"
             app:icon="@drawable/ic_barcode"
             app:iconSize="42dp"
             app:iconTint="@null" />
@@ -102,7 +102,7 @@
         android:layout_height="60dp"
         android:inputType="number"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -113,6 +113,15 @@
     <EditText
         android:id="@+id/editTextDescricao"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="60dp" />-->
+
+    <Button
+        android:id="@+id/buttonSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Salvar"
+        android:textSize="14dp"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"/>
 
 </LinearLayout>

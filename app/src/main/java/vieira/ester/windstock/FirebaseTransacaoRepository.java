@@ -6,18 +6,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class FirebaseItemRepository implements ItemRepository{
+public class FirebaseTransacaoRepository implements TransacaoRepository {
 
     private FirebaseFirestore bancoDados;
 
-    public FirebaseItemRepository() {
+    public FirebaseTransacaoRepository() {
         bancoDados = FirebaseFirestore.getInstance();
     }
 
     @Override
-    public void adicionarItem(Item item, OnCompleteListener<DocumentReference> onCompleteListener) {
+    public void adicionarItem(Transacao transacao, OnCompleteListener<DocumentReference> onCompleteListener) {
         CollectionReference itensRef = bancoDados.collection("itens");
-        itensRef.add(item).addOnCompleteListener(onCompleteListener);
+        itensRef.add(transacao).addOnCompleteListener(onCompleteListener);
     }
 
     @Override
