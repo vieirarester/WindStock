@@ -1,4 +1,4 @@
-<h1 align="center"> Projeto de Programação de Dispositivos Móveis </h1>
+<h1 align="center"> WindStock </h1>
 
 Este é um projeto desenvolvido para a disciplina de Programação de Dispositivos Móveis.
 
