@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:padding="20dp"
+    android:background="#026cb6"
+    tools:context=".TransacaoFragment">
+
+    <TextView
+        android:id="@+id/textTitTrans"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:text="Adicionar Transação"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/editTextData"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Selecione a data"
+        android:inputType="none"
+        android:clickable="true"
+        android:focusable="false"/>
+
+    <TextView
+        android:id="@+id/textProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Produto"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:id="@+id/textCodProduto"
+            android:layout_width="273dp"
+            android:layout_height="60dp"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/buttonScanBarcode"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:backgroundTint="#CCCCCC"
+            app:icon="@drawable/ic_barcode"
+            app:iconSize="42dp"
+            app:iconTint="@null" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textTipoTransacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo de Transação"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <Spinner
+        android:id="@+id/spinnerTipoTransacao"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:entries="@array/tipos_transacao"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quantidade"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/editTextQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:inputType="number"/>
+
+    <TextView
+        android:id="@+id/textDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/editTextDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+</LinearLayout>

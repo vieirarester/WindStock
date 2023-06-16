@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "194401842634",
+    "project_id": "windstock-68a4b",
+    "storage_bucket": "windstock-68a4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194401842634:android:86a3966c83977223a54b33",
+        "android_client_info": {
+          "package_name": "vieira.ester.windstock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194401842634-nf2gvqf6nelhrj70qiuieq2l5ds8ng3a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vieira.ester.windstock",
+            "certificate_hash": "56ad626dca1f3f0f66356dae7b07995d923823b0"
+          }
+        },
+        {
+          "client_id": "194401842634-nil5qcdb57gk2j2g6ko4cfqder2cac5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGuFqu5eZ0m4cr9IuVE_7o1C4_ydHBwHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194401842634-0vab6bnfhjmu0ppv18gho8tf7012moqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

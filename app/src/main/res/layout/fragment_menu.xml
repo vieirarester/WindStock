@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".MenuFragment"
+    android:background="#026cb6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="25dp">
+
+        <ImageView
+            android:id="@+id/imageFotoUsuario"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/textNomeUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+    <Button
+        android:id="@+id/btnTransacao"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="Transação"
+        android:textSize="16sp"
+        android:drawableTop="@android:drawable/ic_menu_add"
+        android:background="@drawable/botao_quadrado"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#CCCCCC"/>
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/btnPedidoCompra"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="Solicitação"
+        android:textSize="16sp"
+        android:drawableTop="@android:drawable/sym_action_email"
+        android:background="@drawable/botao_quadrado"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#CCCCCC"/>
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+        <Button
+            android:id="@+id/btnHistorico"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:text="Histórico"
+            android:textSize="16sp"
+            android:drawableTop="@android:drawable/ic_menu_recent_history"
+            android:background="@drawable/botao_quadrado"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp"
+            app:backgroundTint="#CCCCCC"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnRelatorio"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/botao_quadrado"
+            android:drawableTop="@android:drawable/sym_contact_card"
+            android:text="Relatório"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:backgroundTint="#CCCCCC" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/botao_quadrado"
+            android:drawableTop="@android:drawable/ic_menu_search"
+            android:text="Buscar"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:backgroundTint="#CCCCCC" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
