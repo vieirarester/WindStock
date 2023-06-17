@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_menuFragment_to_transacaoFragment"
             app:destination="@id/transacaoFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_historicoFragment"
+            app:destination="@id/historicoFragment" />
     </fragment>
     <fragment
         android:id="@+id/transacaoFragment"

@@ -65,5 +65,6 @@ public class MenuFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         menuBinding.btnTransacao.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_transacaoFragment, getArguments()));
+        menuBinding.btnHistorico.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_historicoFragment, null));
     }
 }
