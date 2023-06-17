@@ -102,7 +102,7 @@
         android:layout_height="60dp"
         android:inputType="number"/>
 
-    <!--<TextView
+    <TextView
         android:id="@+id/textDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
     <EditText
         android:id="@+id/editTextDescricao"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />-->
+        android:layout_height="60dp" />
 
     <Button
         android:id="@+id/buttonSalvar"

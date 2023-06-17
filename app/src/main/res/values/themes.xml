@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.ProjetoDispMoveis" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <transacao name="colorPrimary">@color/purple_500</transacao>
-        <transacao name="colorPrimaryVariant">@color/purple_700</transacao>
-        <transacao name="colorOnPrimary">@color/white</transacao>
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <transacao name="colorSecondary">@color/teal_200</transacao>
-        <transacao name="colorSecondaryVariant">@color/teal_700</transacao>
-        <transacao name="colorOnSecondary">@color/black</transacao>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <transacao name="android:statusBarColor">?attr/colorPrimaryVariant</transacao>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

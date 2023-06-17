@@ -15,13 +15,13 @@ public class FirebaseTransacaoRepository implements TransacaoRepository {
     }
 
     @Override
-    public void adicionarItem(Transacao transacao, OnCompleteListener<DocumentReference> onCompleteListener) {
-        CollectionReference itensRef = bancoDados.collection("itens");
-        itensRef.add(transacao).addOnCompleteListener(onCompleteListener);
+    public void adicionarTransacao(Transacao transacao, OnCompleteListener<DocumentReference> onCompleteListener) {
+        CollectionReference transacoesRef = bancoDados.collection("transacoes");
+        transacoesRef.add(transacao).addOnCompleteListener(onCompleteListener);
     }
 
     @Override
-    public void listarItens(OnCompleteListener<QuerySnapshot> onCompleteListener) {
+    public void listarTransacoes(OnCompleteListener<QuerySnapshot> onCompleteListener) {
         CollectionReference itensRef = bancoDados.collection("itens");
         itensRef.get().addOnCompleteListener(onCompleteListener);
     }

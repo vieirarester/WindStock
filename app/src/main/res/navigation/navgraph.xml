@@ -31,5 +31,14 @@
         android:id="@+id/transacaoFragment"
         android:name="vieira.ester.windstock.TransacaoFragment"
         android:label="fragment_transacao"
-        tools:layout="@layout/fragment_transacao" />
+        tools:layout="@layout/fragment_transacao" >
+        <action
+            android:id="@+id/action_transacaoFragment_to_historicoFragment"
+            app:destination="@id/historicoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historicoFragment"
+        android:name="vieira.ester.windstock.HistoricoFragment"
+        android:label="fragment_historico"
+        tools:layout="@layout/fragment_historico" />
 </navigation>

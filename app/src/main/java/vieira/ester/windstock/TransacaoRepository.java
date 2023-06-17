@@ -6,6 +6,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public interface TransacaoRepository {
 
-    void adicionarItem(Transacao transacao, OnCompleteListener<DocumentReference> onCompleteListener);
-    void listarItens(OnCompleteListener<QuerySnapshot> onCompleteListener);
+    void adicionarTransacao(Transacao transacao, OnCompleteListener<DocumentReference> onCompleteListener);
+    void listarTransacoes(OnCompleteListener<QuerySnapshot> onCompleteListener);
 }
