@@ -1,36 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#026cb6"
+    android:gravity="top"
+    android:padding="20dp"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textTitHistorico"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:text="Histórico"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTransacoes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <!-- Layout do item individual da lista -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textViewCodigoItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textViewDescricao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textViewQuantidade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!-- Outros elementos de layout para exibir os detalhes da transação -->
-
-    </LinearLayout>
+        android:layout_height="623dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
 </LinearLayout>

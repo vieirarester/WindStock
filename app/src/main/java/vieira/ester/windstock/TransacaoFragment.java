@@ -11,17 +11,13 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -44,11 +40,11 @@ import vieira.ester.windstock.databinding.FragmentTransacaoBinding;
 public class TransacaoFragment extends Fragment {
 
     private FragmentTransacaoBinding transacaoBinding;
-    TransacaoRepository transacaoRepository = new FirebaseTransacaoRepository();
+    private TransacaoRepository transacaoRepository;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 1;
 
-    String nomeUsuario;
+    private String nomeUsuario;
 
     public TransacaoFragment() {
         super(R.layout.fragment_transacao);
@@ -57,6 +53,8 @@ public class TransacaoFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        transacaoRepository = new FirebaseTransacaoRepository(requireContext());
 
         if (getArguments() != null) {
             nomeUsuario = getArguments().getString("nome");
@@ -96,20 +94,7 @@ public class TransacaoFragment extends Fragment {
                 Transacao transacao = new Transacao(codigoItem, descricao, data, tipo, qtdItens, criadaPor);
 
                 // Chamar o método para adicionar a transação
-                transacaoRepository.adicionarTransacao(transacao, new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()) {
-                            // Transação salva com sucesso
-                            Toast.makeText(requireContext(), "Transação salva com sucesso!", Toast.LENGTH_SHORT).show();
-
-                            // Redirecionar o usuário para a tela de histórico de transações
-                            Navigation.findNavController(requireView()).navigate(R.id.action_transacaoFragment_to_historicoFragment);
-                        } else {
-                            Toast.makeText(requireContext(), "Erro ao salvar a transação", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                transacaoRepository.adicionar(transacao, requireView());
             }
         });
 
@@ -197,8 +182,7 @@ public class TransacaoFragment extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Handle the failure
-                        // ...
+
                     }
                 });
     }

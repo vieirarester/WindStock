@@ -20,13 +20,13 @@ public class HistoricoFragment extends Fragment {
 
     FragmentHistoricoBinding historicoBinding;
     RecyclerView recyclerView;
-    TransacaoAdapter adapter ;
+    TransacaoAdapter adapter;
 
-    Database database;
+    FirebaseTransacaoRepository transacaoRepository;
     private List<Transacao> transacoes;
 
     public HistoricoFragment() {
-        // Required empty public constructor
+
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class HistoricoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        database = new Database();
+        transacaoRepository = new FirebaseTransacaoRepository(requireContext());
 
         historicoBinding = FragmentHistoricoBinding.inflate(inflater, container, false);
         transacoes = new ArrayList<>();
@@ -47,13 +47,13 @@ public class HistoricoFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        obterTransacoes();
+        listarTransacoes();
 
         return historicoBinding.getRoot();
     }
 
-    private void obterTransacoes() {
-        database.obterTransacoes(new Database.OnDataListener<List<Transacao>>() {
+    private void listarTransacoes() {
+        transacaoRepository.listarTodas(new FirebaseTransacaoRepository.OnDataListener<List<Transacao>>() {
             @Override
             public void onSuccess(List<Transacao> transacoes) {
                 // Atualizar o RecyclerView com as transações obtidas
@@ -63,7 +63,6 @@ public class HistoricoFragment extends Fragment {
 
             @Override
             public void onFailure(Exception e) {
-                // Tratar o erro ao obter as transações
                 Toast.makeText(getContext(), "Erro ao obter transações", Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_activated="true" android:drawable="#77B949" /> <!-- Estado ativado para transação de entrada -->
+    <item android:state_checked="true" android:drawable="#77B949" /> <!-- Estado marcado para transação de entrada -->
+    <item android:state_selected="true" android:drawable="#77B949" /> <!-- Estado selecionado para transação de entrada -->
+    <item android:drawable="#F32043"/>
+
+</selector>

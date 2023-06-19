@@ -2,6 +2,7 @@ package vieira.ester.windstock;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,7 +54,10 @@ public class TransacaoAdapter extends RecyclerView.Adapter<TransacaoAdapter.Tran
             // Definir os valores adequados para cada transação nos TextViews usando o binding
             adapterBinding.textViewCodigoItem.setText(transacao.getCodigoItem());
             adapterBinding.textViewDescricao.setText(transacao.getDescricao());
+            adapterBinding.textViewData.setText(transacao.getData());
             adapterBinding.textViewQuantidade.setText(String.valueOf(transacao.getQtdItens()));
+            adapterBinding.textViewTipo.setText(String.valueOf(transacao.getTipo()));
+            adapterBinding.textViewCriadoPor.setText(transacao.getCriadaPor());
         }
     }
 }
