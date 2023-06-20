@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -51,13 +52,18 @@ public class TransacaoAdapter extends RecyclerView.Adapter<TransacaoAdapter.Tran
         }
 
         public void bind(Transacao transacao) {
+
+            int cor = transacao.getTipo().equals("Entrada") ? R.color.corEntrada : R.color.corSaida;
+
             // Definir os valores adequados para cada transação nos TextViews usando o binding
-            adapterBinding.textViewCodigoItem.setText(transacao.getCodigoItem());
+            adapterBinding.textViewCodigoItem.setText("Cód: "+transacao.getCodigoItem());
             adapterBinding.textViewDescricao.setText(transacao.getDescricao());
             adapterBinding.textViewData.setText(transacao.getData());
             adapterBinding.textViewQuantidade.setText(String.valueOf(transacao.getQtdItens()));
             adapterBinding.textViewTipo.setText(String.valueOf(transacao.getTipo()));
             adapterBinding.textViewCriadoPor.setText(transacao.getCriadaPor());
+
+            adapterBinding.textViewTipo.setTextColor(itemView.getContext().getResources().getColor(cor));
         }
     }
 }

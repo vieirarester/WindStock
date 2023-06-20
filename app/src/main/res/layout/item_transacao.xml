@@ -1,29 +1,70 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="#CCCCCC">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/textViewQuantidade"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/textViewCodigoItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
             android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewQuantidade" />
 
         <TextView
             android:id="@+id/textViewDescricao"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/textViewCodigoItem"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewTipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="16sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewCriadoPor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTipo" />
 
         <TextView
             android:id="@+id/textViewData"
@@ -31,30 +72,9 @@
             android:layout_height="wrap_content"
             android:textColor="#666666"
             android:textSize="14sp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCriadoPor" />
 
-        <TextView
-            android:id="@+id/textViewQuantidade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textViewTipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textViewCriadoPor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#666666"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

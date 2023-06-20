@@ -7,4 +7,6 @@
     <color name="teal_700">#F01878</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="corSaida">#F32043</color>
+    <color name="corEntrada">#77B949</color>
 </resources>
