@@ -29,6 +29,7 @@ import vieira.ester.windstock.databinding.FragmentMenuBinding;
 public class MenuFragment extends Fragment {
 
     FragmentMenuBinding menuBinding;
+    FirebaseTransacaoRepository transacaoRepository;
     Context contexto;
     String nomeUsuario;
     Uri fotoUsuario;
@@ -53,6 +54,7 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         menuBinding = FragmentMenuBinding.inflate(inflater, container, false);
+        transacaoRepository = new FirebaseTransacaoRepository(requireContext());
         menuBinding.textNomeUsuario.setText(nomeUsuario);
         contexto = requireContext();
 
@@ -64,6 +66,9 @@ public class MenuFragment extends Fragment {
                     .error(R.drawable.ic_foto)
                     .into(menuBinding.imageFotoUsuario);
         }
+
+        transacaoRepository.calcularTotalEntradas(entradas);
+        transacaoRepository.calcularTotalSaidas(saidas);
 
         return menuBinding.getRoot();
 
@@ -99,4 +104,27 @@ public class MenuFragment extends Fragment {
                 });
 
     }
+
+    public OnDataListener<Integer> entradas = new OnDataListener<Integer>() {
+        @Override
+        public void onSuccess(Integer totalEntradas) {
+            menuBinding.txtValorEntrada.setText(String.valueOf(totalEntradas));
+        }
+
+        @Override
+        public void onFailure(Exception e) {
+        }
+    };
+
+    public OnDataListener<Integer> saidas = new OnDataListener<Integer>() {
+        @Override
+        public void onSuccess(Integer totalSaidas) {
+            menuBinding.txtValorSaida.setText(String.valueOf(totalSaidas));
+        }
+
+        @Override
+        public void onFailure(Exception e) {
+        }
+    };
+
 }

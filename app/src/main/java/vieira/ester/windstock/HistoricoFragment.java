@@ -53,7 +53,7 @@ public class HistoricoFragment extends Fragment {
     }
 
     private void listarTransacoes() {
-        transacaoRepository.listarTodas(new FirebaseTransacaoRepository.OnDataListener<List<Transacao>>() {
+        transacaoRepository.listarTodas(new OnDataListener<List<Transacao>>() {
             @Override
             public void onSuccess(List<Transacao> transacoes) {
                 // Atualizar o RecyclerView com as transações obtidas
