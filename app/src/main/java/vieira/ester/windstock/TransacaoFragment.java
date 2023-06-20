@@ -85,7 +85,7 @@ public class TransacaoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String codigoItem = transacaoBinding.textCodProduto.getText().toString();
-                String descricao = transacaoBinding.editTextDescricao.getText().toString();
+                String descricao = transacaoBinding.spinnerDescricao.getSelectedItem().toString();
                 String data = transacaoBinding.editTextData.getText().toString();
                 String tipo = transacaoBinding.spinnerTipoTransacao.getSelectedItem().toString();
                 int qtdItens = Integer.parseInt(transacaoBinding.editTextQuantidade.getText().toString());

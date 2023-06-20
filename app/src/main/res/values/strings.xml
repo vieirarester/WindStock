@@ -5,10 +5,23 @@
     <string name="pesquisar">btnPesquisar</string>
     <string name="entrada">Entrada</string>
     <string name="saida">Saída</string>
+    <string name="escova">GENERATOR BRUSH,POWER,GEN,EP3000143</string>
+    <string name="bateria">BATTERY CHARGER ASSY KIT, 20NM PITCH</string>
+    <string name="respirador">BREATHER,10SCFM/80 GPM,BSPP4</string>
+    <string name="fusivel">FUSE,3AB,5A,250V,FAST ACTING,CERAMIC</string>
+    <string name="lampada">TUBE,FLUOR LIGHTING,32W,Pkg of 30</string>
 
     <string-array name="tipos_transacao">
         <item>@string/entrada</item>
         <item>@string/saida</item>
+    </string-array>
+
+    <string-array name="tipos_itens">
+        <item>@string/escova</item>
+        <item>@string/bateria</item>
+        <item>@string/respirador</item>
+        <item>@string/fusivel</item>
+        <item>@string/lampada</item>
     </string-array>
 
 </resources>

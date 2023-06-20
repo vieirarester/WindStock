@@ -109,11 +109,13 @@
         android:text="Descrição"
         android:textSize="18sp"
         android:textColor="#FFFFFF"/>
-
-    <EditText
-        android:id="@+id/editTextDescricao"
+    <Spinner
+        android:id="@+id/spinnerDescricao"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="86dp"
+        android:entries="@array/tipos_itens"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonSalvar"
