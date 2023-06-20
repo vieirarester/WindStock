@@ -69,6 +69,7 @@ public class MenuFragment extends Fragment {
 
         transacaoRepository.calcularTotalEntradas(entradas);
         transacaoRepository.calcularTotalSaidas(saidas);
+        menuBinding.txtValorEstoque.setText(String.valueOf(estoqueAtual));
 
         return menuBinding.getRoot();
 
@@ -80,6 +81,7 @@ public class MenuFragment extends Fragment {
 
         menuBinding.btnTransacao.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_transacaoFragment, getArguments()));
         menuBinding.btnHistorico.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_historicoFragment, null));
+        menuBinding.btnRelatorio.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_relatorioFragment, null));
         menuBinding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,11 +106,12 @@ public class MenuFragment extends Fragment {
                 });
 
     }
-
+    int estoqueAtual = 0;
     public OnDataListener<Integer> entradas = new OnDataListener<Integer>() {
         @Override
         public void onSuccess(Integer totalEntradas) {
             menuBinding.txtValorEntrada.setText(String.valueOf(totalEntradas));
+            estoqueAtual = totalEntradas;
         }
 
         @Override
@@ -120,6 +123,7 @@ public class MenuFragment extends Fragment {
         @Override
         public void onSuccess(Integer totalSaidas) {
             menuBinding.txtValorSaida.setText(String.valueOf(totalSaidas));
+            estoqueAtual -= totalSaidas;
         }
 
         @Override

@@ -74,5 +74,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-core:20.0.1'
     implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
-
 }

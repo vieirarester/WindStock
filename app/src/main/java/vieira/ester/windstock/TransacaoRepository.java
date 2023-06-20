@@ -14,4 +14,6 @@ public interface TransacaoRepository {
     void listarTodas(OnDataListener<List<Transacao>> listener);
     void calcularTotalEntradas(OnDataListener<Integer> listener);
     void calcularTotalSaidas(OnDataListener<Integer> listener);
+    void calcularEntradas(OnDataListener<Integer> listener, String descricao);
+    void calcularSaidas(OnDataListener<Integer> listener, String descricao);
 }

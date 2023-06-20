@@ -109,6 +109,34 @@ public class FirebaseTransacaoRepository implements TransacaoRepository {
             }
         });
     }
+
+    @Override
+    public void calcularEntradas(OnDataListener<Integer> listener, String descricao) {
+        Query consulta = transacoesRef.whereEqualTo("tipo", "Entrada").whereEqualTo("descricao", descricao);
+        consulta.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                int totalEntradas = task.getResult().size();
+                System.out.println("Total de saídas "+ descricao + "= "+ totalEntradas);
+                listener.onSuccess(totalEntradas);
+            } else {
+                listener.onFailure(new Exception());
+            }
+        });
+    }
+
+    @Override
+    public void calcularSaidas(OnDataListener<Integer> listener, String descricao) {
+        Query consulta = transacoesRef.whereEqualTo("tipo", "Saída").whereEqualTo("descricao", descricao);
+        consulta.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                int totalSaidas = task.getResult().size();
+                System.out.println("Total de saídas "+ descricao + "= "+ totalSaidas);
+                listener.onSuccess(totalSaidas);
+            } else {
+                listener.onFailure(new Exception());
+            }
+        });
+    }
 }
 
 
