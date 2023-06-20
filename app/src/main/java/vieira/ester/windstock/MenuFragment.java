@@ -1,5 +1,6 @@
 package vieira.ester.windstock;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,10 +12,16 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.net.URI;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import vieira.ester.windstock.databinding.FragmentLoginBinding;
 import vieira.ester.windstock.databinding.FragmentMenuBinding;
@@ -22,6 +29,7 @@ import vieira.ester.windstock.databinding.FragmentMenuBinding;
 public class MenuFragment extends Fragment {
 
     FragmentMenuBinding menuBinding;
+    Context contexto;
     String nomeUsuario;
     Uri fotoUsuario;
 
@@ -46,6 +54,7 @@ public class MenuFragment extends Fragment {
 
         menuBinding = FragmentMenuBinding.inflate(inflater, container, false);
         menuBinding.textNomeUsuario.setText(nomeUsuario);
+        contexto = requireContext();
 
         if (fotoUsuario != null) {
 
@@ -66,5 +75,28 @@ public class MenuFragment extends Fragment {
 
         menuBinding.btnTransacao.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_transacaoFragment, getArguments()));
         menuBinding.btnHistorico.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_historicoFragment, null));
+        menuBinding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout(requireContext());
+            }
+        });
+    }
+
+    public void logout(Context context) {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(context, gso);
+        googleSignInClient.signOut()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(context, "Usuário desconectado!", Toast.LENGTH_SHORT).show();
+                        Navigation.findNavController(requireView()).navigate(R.id.action_menuFragment_to_loginFragment);
+                    }
+                });
+
     }
 }
