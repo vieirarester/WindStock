@@ -84,7 +84,7 @@
         android:text="Solicitação"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:backgroundTint="#FFFFFF" />
+        app:backgroundTint="#FFFFFF" />-->
 
     <Button
         android:id="@+id/btnBuscar"
@@ -96,7 +96,7 @@
         android:text="Buscar"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:backgroundTint="#FFFFFF" />-->
+        app:backgroundTint="#FFFFFF" />
 
     <Button
         android:id="@+id/btnRelatorio"

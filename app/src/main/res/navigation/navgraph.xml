@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_menuFragment_to_relatorioFragment"
             app:destination="@id/relatorioFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_buscarFragment"
+            app:destination="@id/buscarFragment" />
     </fragment>
     <fragment
         android:id="@+id/transacaoFragment"
@@ -55,4 +58,8 @@
         android:name="vieira.ester.windstock.RelatorioFragment"
         android:label="fragment_relatorio"
         tools:layout="@layout/fragment_relatorio" />
+    <fragment
+        android:id="@+id/buscarFragment"
+        android:name="vieira.ester.windstock.BuscarFragment"
+        android:label="BuscarFragment" />
 </navigation>

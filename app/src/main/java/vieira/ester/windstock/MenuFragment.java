@@ -82,6 +82,8 @@ public class MenuFragment extends Fragment {
         menuBinding.btnTransacao.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_transacaoFragment, getArguments()));
         menuBinding.btnHistorico.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_historicoFragment, null));
         menuBinding.btnRelatorio.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_relatorioFragment, null));
+        menuBinding.btnBuscar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_buscarFragment, null));
+
         menuBinding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -74,4 +74,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-core:20.0.1'
     implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
+
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+
+    implementation 'com.google.ar:core:1.31.0'
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
 }
