@@ -3,18 +3,28 @@ package vieira.ester.windstock;
 import static androidx.fragment.app.FragmentManager.TAG;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.google.ar.core.Anchor;
@@ -40,12 +50,9 @@ import vieira.ester.windstock.databinding.FragmentBuscarBinding;
 public class BuscarFragment extends Fragment {
 
     private FragmentBuscarBinding buscarBinding;
-    private String codigoQrCode;
+    //private String codigoQrCode;
 
-    private boolean requisitadoInstalacaoAr = true;
-    private Session sessao;
-
-    ArFragment arFragment = (ArFragment) getChildFragmentManager().findFragmentById(R.id.arFragment);
+    WebView webView;
 
     public BuscarFragment() {
     }
@@ -60,6 +67,7 @@ public class BuscarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         buscarBinding = FragmentBuscarBinding.inflate(inflater, container, false);
+
 
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -78,133 +86,25 @@ public class BuscarFragment extends Fragment {
                 scanner.setBeepEnabled(false);
                 scanner.initiateScan();
             }
+        });;**/
+
+        buscarBinding.btnScanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                webView = new WebView(requireContext());
+                buscarBinding.webview.addView(webView);
+
+                webView.getSettings().setJavaScriptEnabled(true);
+
+                webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
+                }
+
+                webView.loadUrl("file:///android_asset/index.html");
+            }
         });
-
-        buscarBinding.textQrCode.setText(codigoQrCode);**/
-
-        carregarCard();
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null && requestCode == IntentIntegrator.REQUEST_CODE) {
-            if (result.getContents() == null) {
-                Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                codigoQrCode = result.getContents();
-                //buscarBinding.textQrCode.setText(codigoQrCode);
-            }
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        try {
-            if (sessao == null && ehVersaoAtualizada()) {
-
-                switch (ArCoreApk.getInstance().requestInstall(requireActivity(), requisitadoInstalacaoAr)) {
-                    case INSTALLED:
-                        // Success: Safe to create the AR session.
-                        sessao = new Session(requireContext());
-                        break;
-                    case INSTALL_REQUESTED:
-                        // O ARCore solicitou a instalação ou atualização do Google Play Services for AR
-
-                        // 1. Pausar a atividade
-                        onPause();
-                        // 2. Solicitar a instalação ou atualização do Google Play Services for AR
-                        ArCoreApk.InstallStatus installStatusDeferred = ArCoreApk.getInstance().requestInstall(requireActivity(), true);
-                        if (installStatusDeferred != ArCoreApk.InstallStatus.INSTALLED) {
-                            // A instalação ou atualização não foi concluída com sucesso
-                            Toast.makeText(requireContext(), "A instalação ou atualização do ARCore falhou.", Toast.LENGTH_LONG).show();
-                        }
-                        // 3. Retomar a atividade após a conclusão
-                        onResume();
-                        break;
-                }
-            }
-        } catch (UnavailableUserDeclinedInstallationException e) {
-            Toast.makeText(requireContext(), "O usuário recusou a instalação do ARCore.", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Toast.makeText(requireContext(), "Ocorreu um erro durante a inicialização do AR.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (sessao == null){
-            arFragment.onPause();
-            sessao.pause();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        if(sessao != null) {
-            sessao.close();
-            sessao = null;
-        }
-    }
-
-    private boolean ehVersaoAtualizada() {
-        ArCoreApk.Availability availability = ArCoreApk.getInstance().checkAvailability(requireContext());
-        switch (availability) {
-            case SUPPORTED_INSTALLED:
-                return true;
-
-            case SUPPORTED_APK_TOO_OLD:
-            case SUPPORTED_NOT_INSTALLED:
-                try {
-                    ArCoreApk.InstallStatus installStatus = ArCoreApk.getInstance().requestInstall(requireActivity(), true);
-                    switch (installStatus) {
-                        case INSTALL_REQUESTED:
-                            return false;
-                        case INSTALLED:
-                            return true;
-                    }
-                } catch (UnavailableException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-                return false;
-
-            case UNSUPPORTED_DEVICE_NOT_CAPABLE:
-                // Este dispositivo não é compatível com AR.
-                return false;
-
-            case UNKNOWN_CHECKING:
-                // O ARCore está verificando a disponibilidade com uma consulta remota.
-                // Esta função deve ser chamada novamente após esperar 200 ms para determinar o resultado da consulta.
-                return false;
-
-            case UNKNOWN_ERROR:
-            case UNKNOWN_TIMED_OUT:
-                // Ocorreu um erro ao verificar a disponibilidade do AR. Isso pode ocorrer porque o dispositivo está off-line.
-                return false;
-        }
-
-        return false;
-    }
-
-    public void criarSessao() throws UnavailableDeviceNotCompatibleException, UnavailableSdkTooOldException, UnavailableArcoreNotInstalledException, UnavailableApkTooOldException {
-        sessao = new Session(requireContext());
-
-        Config configuracao = new Config(sessao);
-
-        sessao.configure(configuracao);
-    }
-
-    private void carregarCard() {
-
 
     }
 
