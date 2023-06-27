@@ -3,6 +3,7 @@ package vieira.ester.windstock;
 import static androidx.fragment.app.FragmentManager.TAG;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -26,8 +27,11 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
+import android.webkit.PermissionRequest;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.google.ar.core.Anchor;
@@ -53,6 +57,7 @@ import vieira.ester.windstock.databinding.FragmentBuscarBinding;
 public class BuscarFragment extends Fragment {
 
     private static final int REQUEST_CAMERA_PERMISSION = 100;
+    private String TAG = BuscarFragment.class.toString();
     private FragmentBuscarBinding buscarBinding;
     WebView webView;
 
@@ -100,45 +105,36 @@ public class BuscarFragment extends Fragment {
 
     }
 
-    private void carregarPaginaAR() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-            } else {
-                carregarHtml();
-            }
-        } else {
-            // Versões anteriores ao Android M não precisam de solicitação de permissão em tempo de execução
-            carregarHtml();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Toast.makeText(requireContext(), "O CÓD É= "+requestCode, Toast.LENGTH_SHORT).show();
-        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                carregarHtml();
-            } else {
-
-            }
-        }
-    }
-
-    public void carregarHtml(){
+    public void carregarPaginaAR(){
         webView = new WebView(requireContext());
         buscarBinding.webview.addView(webView);
 
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onPermissionRequest(final PermissionRequest request) {
+                Log.d(TAG, "onPermissionRequest");
+                requireActivity().runOnUiThread(new Runnable() {
+                    @TargetApi(Build.VERSION_CODES.M)
+                    @Override
+                    public void run() {
+                        if(request.getOrigin().toString().contains("https://windstock-68a4b.web.app")) {
+                            Log.d(TAG, "GRANTED");
+                            request.grant(request.getResources());
+                        } else {
+                            Log.d(TAG, "DENIED");
+                            request.deny();
+                        }
+                    }
+                });
+            }
 
-        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
 
-        CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
+        });
 
-        webView.loadUrl("file:///android_asset/index.html");
+        webView.loadUrl("https://windstock-68a4b.web.app");
     }
-
 
 }

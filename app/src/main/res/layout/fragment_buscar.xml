@@ -10,11 +10,10 @@
     android:padding="20dp"
     tools:context=".BuscarFragment">
 
-
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="593dp" />
+        android:layout_height="628dp" />
 
     <Button
         android:id="@+id/btnScanner"
