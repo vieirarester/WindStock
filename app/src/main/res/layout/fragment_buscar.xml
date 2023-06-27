@@ -10,12 +10,11 @@
     android:padding="20dp"
     tools:context=".BuscarFragment">
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        />
+        android:layout_height="593dp" />
 
     <Button
         android:id="@+id/btnScanner"

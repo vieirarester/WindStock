@@ -20,14 +20,14 @@
             id="animated-marker"
             type="pattern"
             preset="custom"
-            url="assets/marker.patt"
+            url="marker.patt"
             raycaster="objects: .clickable"
             emitevents="true"
             cursor="fuse: false; rayOrigin: mouse;"
             id="markerA"
     >
         <a-image
-                src="asset.jpg"
+                src="images/asset.jpg"
                 scale="1 1 1"
                 class="clickable"
                 rotation="-90 0 0"
@@ -38,20 +38,5 @@
     <a-entity camera></a-entity>
 </a-scene>
 
-<script>
-    // Verifica se a permissão da câmera já foi concedida
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-          // Permissão concedida, faça algo aqui se necessário
-        })
-        .catch(function(error) {
-          // Permissão negada ou erro ao solicitar permissão
-          console.error('Erro ao acessar a câmera:', error);
-        });
-    } else {
-      console.error('getUserMedia não suportado no navegador.');
-    }
-  </script>
 </body>
 </html>
