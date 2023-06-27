@@ -81,7 +81,7 @@ public class TransacaoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String codigoItem = transacaoBinding.textCodProduto.getText().toString();
-                String descricao = transacaoBinding.spinnerDescricao.getSelectedItem().toString();
+                String descricao = transacaoBinding.textViewDescricao.getText().toString();
                 String data = transacaoBinding.editTextData.getText().toString();
                 String tipo = transacaoBinding.spinnerTipoTransacao.getSelectedItem().toString();
                 int qtdItens = Integer.parseInt(transacaoBinding.editTextQuantidade.getText().toString());
@@ -171,6 +171,7 @@ public class TransacaoFragment extends Fragment {
                             int valueType = barcode.getValueType();
 
                             transacaoBinding.textCodProduto.setText(rawValue);
+                            transacaoBinding.textViewDescricao.setText(setDescricao(rawValue));
 
                         }
                     }
@@ -181,5 +182,20 @@ public class TransacaoFragment extends Fragment {
 
                     }
                 });
+    }
+
+    public String setDescricao(String codigo){
+        String descricao = "";
+
+        if(codigo.equals("108W5034P001")){
+            descricao = getString(R.string.escova);
+        } else if(codigo.equals("109W8937G001")){
+            descricao = getString(R.string.bateria);
+        } else if(codigo.equals("108W3451P001")){
+            descricao = getString(R.string.respirador);
+        } else if(codigo.equals("104W2227P002")){
+            descricao = getString(R.string.lampada);
+        }
+        return descricao;
     }
 }

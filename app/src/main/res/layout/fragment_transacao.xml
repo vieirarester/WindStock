@@ -73,6 +73,30 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <!--<Spinner
+        android:id="@+id/spinnerDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:entries="@array/tipos_itens"
+        android:textSize="20sp"
+        android:textStyle="bold" />-->
+
+    <TextView
+        android:id="@+id/textViewDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:focusable="false"
+        android:gravity="center_vertical"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/textTipoTransacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,21 +125,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:inputType="number"/>
-
-    <TextView
-        android:id="@+id/textDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descrição"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"/>
-    <Spinner
-        android:id="@+id/spinnerDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:entries="@array/tipos_itens"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonSalvar"

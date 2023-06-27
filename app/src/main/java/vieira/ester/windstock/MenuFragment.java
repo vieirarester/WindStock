@@ -69,7 +69,6 @@ public class MenuFragment extends Fragment {
 
         transacaoRepository.calcularTotalEntradas(entradas);
         transacaoRepository.calcularTotalSaidas(saidas);
-        menuBinding.txtValorEstoque.setText(String.valueOf(estoqueAtual));
 
         return menuBinding.getRoot();
 
