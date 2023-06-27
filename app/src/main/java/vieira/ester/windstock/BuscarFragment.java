@@ -16,6 +16,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,6 +27,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ConsoleMessage;
 import android.webkit.CookieManager;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
@@ -56,7 +58,7 @@ import vieira.ester.windstock.databinding.FragmentBuscarBinding;
 
 public class BuscarFragment extends Fragment {
 
-    private static final int REQUEST_CAMERA_PERMISSION = 100;
+    private static final int CAMERA_REQUEST = 1888;
     private String TAG = BuscarFragment.class.toString();
     private FragmentBuscarBinding buscarBinding;
     WebView webView;
@@ -75,9 +77,6 @@ public class BuscarFragment extends Fragment {
                              Bundle savedInstanceState) {
         buscarBinding = FragmentBuscarBinding.inflate(inflater, container, false);
 
-
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         return buscarBinding.getRoot();
     }
 
@@ -85,56 +84,111 @@ public class BuscarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /**buscarBinding.btnQrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator scanner = new IntentIntegrator(requireActivity());
-                scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-                scanner.setBeepEnabled(false);
-                scanner.initiateScan();
-            }
-        });;**/
-
         buscarBinding.btnScanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                carregarPaginaAR();
+                checkForAndAskForPermissions();
             }
         });
 
+
     }
 
-    public void carregarPaginaAR(){
-        webView = new WebView(requireContext());
-        buscarBinding.webview.addView(webView);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CAMERA_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    createWebView();
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setAllowFileAccessFromFileURLs(true);
-        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    private void createWebView() {
+
+        webView = buscarBinding.webview;
+        setUpWebViewDefaults(webView);
+        webView.loadUrl("https://windstock-68a4b.web.app");
         webView.setWebChromeClient(new WebChromeClient() {
+            public boolean onConsoleMessage(ConsoleMessage m) {
+                Log.d("getUserMedia, WebView", m.message() + " -- From line "
+                        + m.lineNumber() + " of "
+                        + m.sourceId());
+
+                return true;
+            }
+
             @Override
             public void onPermissionRequest(final PermissionRequest request) {
-                Log.d(TAG, "onPermissionRequest");
                 requireActivity().runOnUiThread(new Runnable() {
-                    @TargetApi(Build.VERSION_CODES.M)
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void run() {
-                        if(request.getOrigin().toString().contains("https://windstock-68a4b.web.app")) {
-                            Log.d(TAG, "GRANTED");
+                        // Below isn't necessary, however you might want to:
+                        // 1) Check what the site is and perhaps have a blacklist
+                        // 2) Have a pop up for the user to explicitly give permission
+                        if(request.getOrigin().toString().contains("https://windstock-68a4b.web.app")){
                             request.grant(request.getResources());
                         } else {
-                            Log.d(TAG, "DENIED");
                             request.deny();
                         }
                     }
                 });
             }
-
-
         });
+    }
 
-        webView.loadUrl("https://windstock-68a4b.web.app");
+    private void checkForAndAskForPermissions() {
+
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                    Manifest.permission.CAMERA)) {
+
+            } else ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
+        } else {
+            createWebView();
+        }
+    }
+
+    private void setUpWebViewDefaults(WebView webView) {
+
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setAllowContentAccess(true);
+        settings.setAllowFileAccessFromFileURLs(true);
+        settings.setAllowUniversalAccessFromFileURLs(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setMediaPlaybackRequiresUserGesture(false);
+
+        // Enable remote debugging via chrome://inspect
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
+        webView.clearCache(true);
+        webView.clearHistory();
+        webView.setWebViewClient(new WebViewClient());
     }
 
 }

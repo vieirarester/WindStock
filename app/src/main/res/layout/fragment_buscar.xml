@@ -10,10 +10,21 @@
     android:padding="20dp"
     tools:context=".BuscarFragment">
 
+    <TextView
+        android:id="@+id/textTitBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:text="Pesquise sobre uma peça"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="628dp" />
+        android:layout_height="550dp"
+        />
 
     <Button
         android:id="@+id/btnScanner"
@@ -24,6 +35,7 @@
         android:text="Scanner"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:backgroundTint="#FFFFFF"/>
+        app:backgroundTint="#FFFFFF"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
